@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ngotngao🍬</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #ffd6e7 0%, #ffe6f0 100%);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+/* Tim bay */
+.heart {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: pink;
+  transform: rotate(45deg);
+  animation: float 5s ease-in infinite;
+}
+.heart::before, .heart::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: pink;
+  border-radius: 50%;
+}
+.heart::before {
+  top: -7.5px;
+  left: 0;
+}
+.heart::after {
+  left: 7.5px;
+  top: 0;
+}
+@keyframes float {
+  0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+}
+
+/* Phong bì */
+.envelope {
+  position: relative;
+  width: 220px;
+  height: 140px;
+  background: #ffc1d3;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #ffb6c1;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: top;
+  transition: transform 0.8s ease;
+  backface-visibility: hidden;
+}
+.letter {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  width: 180px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  opacity: 0;
+  transition: all 1s ease;
+}
+.open .flap {
+  transform: rotateX(-180deg);
+}
+.open .letter {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-60px);
+}
+
+/* Vòng chữ quanh tim */
+.ring {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: #ff6fa3;
+  font-weight: bold;
+  animation: rotate 10s linear infinite;
+}
+@keyframes rotate {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<div class="ring">💗 Happy Women’s Day 💗 Happy Women’s Day 💗</div>
+
+<div class="envelope" id="envelope">
+  <div class="flap"></div>
+  <div class="letter">
+    <h3>💌 Gửi: Ngotngao🍬</h3>
+    <p>Chúc Ngotngao🍬 của anh luôn xinh đẹp, vui vẻ, tích cực nhé.<br>
+    Anh mong anh sẽ sớm trở về cạnh em cùng em bước đi tiếp dù cho hoàn cảnh như nào nhéeee💕</p>
+  </div>
+</div>
+
+<script>
+const envelope = document.getElementById('envelope');
+envelope.addEventListener('click', () => {
+  envelope.classList.toggle('open');
+});
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 400);
+</script>
+</body>
+</html>
